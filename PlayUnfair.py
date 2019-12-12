@@ -36,29 +36,35 @@ def encrypt(message, indexC) :
 	#establish nil ciphertext that we can later add to
 	ciphertext = ""
 
-	for x in message :
-		pos = indexC.index(x)
-		print pos
+	#for x in message :
+	#	pos = indexC.index(x)
+	#	print pos
 
 	#this is how I parse even and odd locations in the message
 	#[0::2] = start at 0, go till end, move by 2
 	#[1::2] = start at 1, go till end, move by 2
 	even = message [0::2]
 	odd = message [1::2]
+	print message
 	print even, odd
 
 	#so far everything works
 
 	#here is where playfair math starts
-	#for x in even :
-	#	pos = indexC.index(x)
-	#	posPlus = indexC.index(x + 1)	#needs to find position of next letter in message
+	for x in even :
+		iPos = indexC.index(x)	#index position of x in message
+		mPos = message.index(x)
+		print x, "pos", iPos
+		posPlus = indexC.index(message[mPos + 1])	#needs to find position of next letter in message
+		print message[mPos + 1], "posPlus", posPlus
 	#	encPos = 5 * (math.	floor(pos / 5)) + posPlus - 5 * (math.floor(posPlus / 5))
-	#				#encPos = encPos - 24
-	#for x in odd :
-	#	pos = index.index(x)
-	#	print pos
-	#	posNeg = index.index(x) #troublesome
+	#	encPos = encPos - 24
+	for x in odd :
+		iPos = indexC.index(x)
+		mPos = message.index(x)
+		print x, "pos", iPos
+		posNeg = indexC.index(message[mPos - 1])
+		print message[mPos - 1], "posNeg", posNeg
 	#	encPos = 5 * (math.floor(pos / 5)) + posNeg - 5 * (math.floor(posNeg / 5))
 	#	if(encPos > 24) :
 	#	encPos = encPos - 24
