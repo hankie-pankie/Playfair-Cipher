@@ -9,7 +9,7 @@ codeword = raw_input("Enter a codeword: ")
 
 message = raw_input("Enter some text to encrypt or decrypt: ")
 
-#function to create the coded index fuck
+#function to create the coded index thing
 def index(codeword) :
 	#I would like to insert a line that changes codeword from
 	#'apple' to 'aple' so that the index has no repeated letters
