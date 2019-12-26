@@ -12,7 +12,7 @@ message = raw_input("Enter some text to encrypt or decrypt: ")
 #function to create the coded index
 def indexus(codeword) :
 	#I would like to insert a line that changes codeword from
-	#'jonathan' to 'jonathn' so that the index has no repeated letters
+	#'attack' to 'atck' so that the index has no repeated letters
 	indexC = alphabet
 	#nested for loop that removes letters IN codeword FROM alphabet
 	for x in alphabet :
