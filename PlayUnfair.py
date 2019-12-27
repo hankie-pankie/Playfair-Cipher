@@ -34,40 +34,36 @@ def encrypt(message, indexC) :
 	#eliminate z
 	message = message.replace("z", "x")
 	#establish nil ciphertext that we can later add to
+	if len(message) % 2 == 1:
+		message = message + "x"
 	ciphertext = ""
 
-	#for x in message :
-	#	pos = indexC.index(x)
-	#	print pos
+	enuMessage = enumerate(message)
+	for ind, letter, in enuMessage:
+		iPos = indexC.index(letter)
 
-	#this is how I parse even and odd locations in the message
-	#[0::2] = start at 0, go till end, move by 2
-	#[1::2] = start at 1, go till end, move by 2
-	even = message [0::2]
-	odd = message [1::2]
-	print message
-	print even, odd
+		if ind % 2 == 0:
+			pos2 = indexC.index(message[ind + 1])
+			encPos = 5 * (math.floor(iPos / 5)) + pos2 - 5 * (math.floor(pos2 / 5))
+			if encPos > 24 :
+				encPos = encPos - 24
+			if encPos < 0 :
+				encPos = encPos + 24
+			encPos = int(encPos)
+			encLetter = message[encPos]
+		else:
+			pos2 = indexC.index(message[ind - 1])
+			encpos = 5 * (math.floor(iPos / 5)) + pos2 - 5 * (math.floor(pos2 / 5))
+			if encPos > 24 :
+				encPos = encPos - 24
+			if encPos < 0 :
+				encPos = encPos + 24
+			encPos = int(encPos)
+			encLetter = message[encPos]
 
-	#so far everything works
+		print ind, letter, iPos, encLetter, pos2
 
-	#here is where playfair math starts
-	for x in even :
-		iPos = indexC.index(x)	#index position of x in message
-		mPos = message.index(x)
-		print x, "pos", iPos
-		posPlus = indexC.index(message[mPos + 1])	#needs to find position of next letter in message
-		print message[mPos + 1], "posPlus", posPlus
-	#	encPos = 5 * (math.	floor(pos / 5)) + posPlus - 5 * (math.floor(posPlus / 5))
-	#	encPos = encPos - 24
-	for x in odd :
-		iPos = indexC.index(x)
-		mPos = message.index(x)
-		print x, "pos", iPos
-		posNeg = indexC.index(message[mPos - 1])
-		print message[mPos - 1], "posNeg", posNeg
-	#	encPos = 5 * (math.floor(pos / 5)) + posNeg - 5 * (math.floor(posNeg / 5))
-	#	if(encPos > 24) :
-	#	encPos = encPos - 24
+
 	return ciphertext
 
 encrypt(message, indexus(codeword))

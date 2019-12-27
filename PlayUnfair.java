@@ -66,7 +66,7 @@ public class PlayUnfair {
 				double posPlus = index.indexOf(plaintext.charAt(i + 1));
 				//encryption formula for even!
 				double encPos = 5 * (Math.floor(pos / 5)) + posPlus - 5 * (Math.floor(posPlus / 5));
-				if(pos > 24) {
+				if(encPos > 24) {
 					encPos = encPos - 24;
 				}
 				if(encPos < 0) {
