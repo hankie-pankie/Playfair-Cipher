@@ -66,10 +66,9 @@ def encrypt(message, indexC) :
 
 		print ind, letter, iPos, encLetter, pos2
 
-		jazz = ""
-		jazz += encLetter
+		ciphertext += encLetter
 
-		print jazz
+	print ciphertext
 
 	return ciphertext
 
