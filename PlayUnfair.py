@@ -1,6 +1,7 @@
 #I made a java file that encrypts strings with the playfair cipher
 #I want to make some python to do the same
 
+import pdb
 import math
 
 alphabet = "abcdefghijklmnopqrstuvwxy"
@@ -42,6 +43,7 @@ def encrypt(message, indexC) :
 	for ind, letter, in enuMessage:
 		iPos = indexC.index(letter)
 
+		#pdb.set_trace()
 		if ind % 2 == 0:
 			pos2 = indexC.index(message[ind + 1])
 			encPos = 5 * (math.floor(iPos / 5)) + pos2 - 5 * (math.floor(pos2 / 5))
@@ -50,7 +52,8 @@ def encrypt(message, indexC) :
 			if encPos < 0 :
 				encPos = encPos + 24
 			encPos = int(encPos)
-			encLetter = message[encPos]
+			encLetter = indexC[encPos]
+			#hmmmmm
 		else:
 			pos2 = indexC.index(message[ind - 1])
 			encpos = 5 * (math.floor(iPos / 5)) + pos2 - 5 * (math.floor(pos2 / 5))
@@ -59,10 +62,14 @@ def encrypt(message, indexC) :
 			if encPos < 0 :
 				encPos = encPos + 24
 			encPos = int(encPos)
-			encLetter = message[encPos]
+			encLetter = indexC[encPos]
 
 		print ind, letter, iPos, encLetter, pos2
 
+		jazz = ""
+		jazz += encLetter
+
+		print jazz
 
 	return ciphertext
 
