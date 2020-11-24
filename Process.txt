@@ -1,0 +1,28 @@
+The steps of the encryption should look something like this regardless of programming language
+
+Step 1: User input
+    Codeword
+    Message
+    Omitted letter (optional)
+
+Step 2: Formatting
+    Message must be an even number of letters
+    Message & codeword must not contain omitted letter
+    Message & codeword should be lowercase
+
+Step 3: Indexing
+    Create index = codeword followed by 25 letter alphabet
+    Remove all duplicate letters from index
+
+    Must be able to track each letter in the message with its position in message and location in index
+    Ex: juiceabdfghklmnopqrstvwxy attack at dawn
+        a:0,5 t:1,20 t:2,20 a:3,5 c:4,3 etc.
+
+Step 4: encryption
+    characters at even positions
+        index location goes through even formula
+        new character assigned to new index location
+    characters at odd positions
+        index location goes through odd formula
+        new character assigned to new index location
+    
