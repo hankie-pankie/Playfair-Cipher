@@ -58,7 +58,11 @@ for my $i (@plaintext)
 
 #    if even position in plaintext
 #    {
-#        something
+#        $boot 
+#    }
+#    else
+#    {
+#        something else
 #    }
 }
 print "\n";
