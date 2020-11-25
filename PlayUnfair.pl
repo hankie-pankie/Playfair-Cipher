@@ -1,7 +1,8 @@
 #!/usr/bin/perl
-use strict;
+#use strict;
 use warnings;
 use List::MoreUtils qw(uniq first_index);
+use POSIX qw(floor);
 
 #Perl Playfair Cipher Algorithm
 
@@ -30,42 +31,56 @@ chomp $message;
 #removes whitespace
 $message =~ s/\s+//g;
 my @plaintext = split //, $message;
+#maybe create a hash given @plaintext 
+#each letter would get a number position assigned
+#Hash probably wouldn't do well with repeated letters having 2 positions
+
+#Doesn't work for some reason
 if (@plaintext % 2 == 1)
 {
     @plaintext = push(@plaintext, "x");
 }
 
-#print each letter of message with position in message
-
-for my $j (@plaintext)
+#$i gets numbers 0-$#plaintext
+for my $i (0..$#plaintext)
 {
-    print $j;
-    #ISSUE: only returns first instance of letter. ex: baby > b0a1b0y3
-    #Should return b0a1b2y3
-    my $pos = first_index {$_ eq $j} @plaintext;
-    print $pos;
+    #letter at each $i
+    my $letr = $plaintext[$i];
+    #location of each letter in @alphabet
+    my $idx = first_index {$_ eq $plaintext[$i]} @alphabet;
+
+    if ($i % 2 == 0)
+    {
+        my $posPlus = first_index {$_ eq $plaintext[$i + 1]} @alphabet;
+        my $edx = 5 * (floor($idx / 5)) + $posPlus - 5 * (floor($posPlus / 5));
+        if ($edx > 24)
+        {
+            $edx = $edx - 24;
+        }
+        if ($edx < 0)
+        {
+            $edx = $edx + 24;
+        }
+        $eChar = $alphabet[$edx];
+    }
+    else
+    {
+        my $posNeg = first_index {$_ eq $plaintext[$i - 1]} @alphabet;
+        my $edx = 5 * (floor($idx / 5)) + $posNeg - 5 * (floor($posNeg / 5));
+        if ($edx > 24)
+        {
+            $edx = $edx - 24;
+        }
+        if ($edx < 0)
+        {
+            $edx = $edx + 24;
+        }
+        $eChar = $alphabet[$edx];
+    }
+
+    print "$i: $letr $idx $eChar\n";
+
 }
-print "\n";
-
-#print each letter of message with position in alphabet
-
-for my $i (@plaintext)
-{
-    print $i;
-    #return the index of char $i in alphabet
-    my $boot = first_index {$_ eq $i} @alphabet;
-    print $boot;
-
-#    if even position in plaintext
-#    {
-#        $boot 
-#    }
-#    else
-#    {
-#        something else
-#    }
-}
-print "\n";
 
 #THIS GOOD
 #my @i = first_index {$_ eq @plaintext[0..$#plaintext]} @alphabet;
@@ -82,11 +97,3 @@ print "\n";
 
 #my $pos = 5;
 #my $letter = $plaintext[$pos];
-
-#print "$letter\n";
-
-# if @plaintext[0..@plaintext] ($#plaintext)
-
-
-
-#print "$index @plaintext\n";

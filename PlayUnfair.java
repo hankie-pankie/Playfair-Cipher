@@ -72,7 +72,7 @@ public class PlayUnfair {
 				if(encPos < 0) {
 					encPos = encPos + 24;
 				}
-				//makes character from of position
+				//makes character from position
 				char echar = index.charAt((int) encPos);
 				
 				//need to switch the letter if it's the same as before
