@@ -1,5 +1,5 @@
 # Playfair-Cipher
-Some code to use the playfair cipher. I'm using a formula I created rather than developing a matrix or anything. So it's cool math time.
+Some code to use the playfair cipher. I'm using an algorithm I created rather than developing a matrix or anything. So it's cool math time.
 
 The playfair cipher is a graphical cipher that uses a 5x5 grid to rearrange pairs of letters. I created a formula that can represent the shift. I have attached a paper I wrote for my highschool math class that explains in detail the playfair cipher, my formula, as well as one or two other ciphers. There are lots of inaccuracies especially when I talk about RSA encryption. We'll just ignore those...
 
