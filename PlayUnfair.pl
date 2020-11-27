@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-#use strict;
+use strict;
 use warnings;
 use List::MoreUtils qw(uniq first_index);
 use POSIX qw(floor);
@@ -14,32 +14,30 @@ chomp $codeword;
 $codeword =~ tr/A-Z/a-z/;
 #removes whitespace
 $codeword =~ s/\s+//g;
+$codeword =~ s/z/x/g;
 
 my @key = split //, $codeword;
 #adds key to beginning of alphabet
 unshift (@alphabet, @key);
-#removes repeated characters from keyalphabet
+#removes repeated characters from key alphabet
 @alphabet = uniq(@alphabet);
 
 print "@alphabet[0..$#alphabet]\n";
-
-#need to neaten up codeword
 
 print "enter a message: ";
 my $message = <STDIN>;
 chomp $message;
 #removes whitespace
 $message =~ s/\s+//g;
+$message =~ s/z/x/g;
 my @plaintext = split //, $message;
-#maybe create a hash given @plaintext 
-#each letter would get a number position assigned
-#Hash probably wouldn't do well with repeated letters having 2 positions
 
-#Doesn't work for some reason
 if (@plaintext % 2 == 1)
 {
-    @plaintext = push(@plaintext, "x");
+    push(@plaintext, "x");
 }
+
+my $ciphertext;
 
 #$i gets numbers 0-$#plaintext
 for my $i (0..$#plaintext)
@@ -48,7 +46,9 @@ for my $i (0..$#plaintext)
     my $letr = $plaintext[$i];
     #location of each letter in @alphabet
     my $idx = first_index {$_ eq $plaintext[$i]} @alphabet;
+    my $eChar;
 
+    #Letters in same column aren't swapped--need fix
     if ($i % 2 == 0)
     {
         my $posPlus = first_index {$_ eq $plaintext[$i + 1]} @alphabet;
@@ -62,6 +62,11 @@ for my $i (0..$#plaintext)
             $edx = $edx + 24;
         }
         $eChar = $alphabet[$edx];
+        if ($eChar eq $plaintext[$i])
+        {
+            $eChar = $plaintext[$i + 1]
+        }
+        $ciphertext .= $eChar;
     }
     else
     {
@@ -76,24 +81,11 @@ for my $i (0..$#plaintext)
             $edx = $edx + 24;
         }
         $eChar = $alphabet[$edx];
+        if ($eChar eq $plaintext[$i])
+        {
+            $eChar = $plaintext[$i - 1]
+        }
+        $ciphertext .= $eChar;
     }
-
-    print "$i: $letr $idx $eChar\n";
-
 }
-
-#THIS GOOD
-#my @i = first_index {$_ eq @plaintext[0..$#plaintext]} @alphabet;
-#print "@i\n";
-
-#Maybe but not as gud
-#'h' isn't numeric. Needs other equivalence operator...
-#my @i = grep { $alphabet[$_] eq "h"} 0..$#alphabet;
-#print :"@i\n";
-
-#print first_index {}
-
-#my $index = "$codeword$alphabet";
-
-#my $pos = 5;
-#my $letter = $plaintext[$pos];
+print "$ciphertext\n";

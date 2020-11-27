@@ -1,5 +1,7 @@
 	import java.util.Scanner;
 
+	//there is some broken stuff in here still
+
 public class PlayUnfair {
 	
 	final static String alphabet = "abcdefghijklmnopqrstuvwxy";
@@ -14,8 +16,8 @@ public class PlayUnfair {
 		String codeword = input.nextLine();
 		//some formatting for codeword. I also need to replace repeated letters in codeword with ""
 		codeword = codeword.toLowerCase();
-		codeword = codeword.replaceAll("\\s+", "")
-		codeword = codeword.replaceAll("z", "x")
+		codeword = codeword.replaceAll("\\s+", "");
+		codeword = codeword.replaceAll("z", "x");
 		//creates the encryption index
 		index(codeword);
 		
