@@ -3,15 +3,15 @@ The steps of the encryption should look something like this regardless of progra
 Step 1: User input
     Codeword
     Message
-    Omitted letter (optional)
 
 Step 2: Formatting
     Message must be an even number of letters
     Message & codeword must not contain omitted letter
     Message & codeword should be lowercase
+    Message & codeword should not have whitespace
 
 Step 3: Indexing
-    Create index = codeword followed by 25 letter alphabet
+    Create index = codeword followed by 25 (0-24) letter alphabet
     Remove all duplicate letters from index
 
     Must be able to track each letter in the message with its position in message and location in index
@@ -22,7 +22,8 @@ Step 4: encryption
     characters at even positions
         index location goes through even formula
         new character assigned to new index location
+        new character added to ciphertext
     characters at odd positions
         index location goes through odd formula
         new character assigned to new index location
-    
+        new character added to ciphertext
