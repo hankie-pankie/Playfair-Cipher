@@ -22,8 +22,6 @@ unshift (@alphabet, @key);
 #removes repeated characters from key alphabet
 @alphabet = uniq(@alphabet);
 
-print "@alphabet[0..$#alphabet]\n";
-
 print "enter a message: ";
 my $message = <STDIN>;
 chomp $message;
