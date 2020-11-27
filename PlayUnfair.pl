@@ -20,7 +20,7 @@ my @key = split //, $codeword;
 #adds key to beginning of alphabet
 unshift (@alphabet, @key);
 #removes repeated characters from key alphabet
-@alphabet = uniq(@alphabet);
+my @indeks = uniq(@alphabet);
 
 print "enter a message: ";
 my $message = <STDIN>;
@@ -37,19 +37,19 @@ if (@plaintext % 2 == 1)
 
 my $ciphertext;
 
-#$i gets numbers 0-$#plaintext
-for my $i (0..$#plaintext)
+#$pos gets numbers 0-$#plaintext
+for my $pos (0..$#plaintext)
 {
-    #letter at each $i
-    my $letr = $plaintext[$i];
-    #location of each letter in @alphabet
-    my $idx = first_index {$_ eq $plaintext[$i]} @alphabet;
-    my $eChar;
+    #letter at each $pos
+    my $letr = $plaintext[$pos];
+    #index of each letter in @indeks
+    my $idx = first_index {$_ eq $plaintext[$pos]} @indeks;
+    my $eletr;
 
-    #Letters in same column aren't swapped--need fix
-    if ($i % 2 == 0)
+    if ($pos % 2 == 0)
     {
-        my $posPlus = first_index {$_ eq $plaintext[$i + 1]} @alphabet;
+        my $posPlus = first_index {$_ eq $plaintext[$pos + 1]} @indeks;
+        #new encrypted position of letter in indeks
         my $edx = 5 * (floor($idx / 5)) + $posPlus - 5 * (floor($posPlus / 5));
         if ($edx > 24)
         {
@@ -59,16 +59,16 @@ for my $i (0..$#plaintext)
         {
             $edx = $edx + 24;
         }
-        $eChar = $alphabet[$edx];
-        if ($eChar eq $plaintext[$i])
+        $eletr = $indeks[$edx];
+        if ($eletr eq $plaintext[$pos])
         {
-            $eChar = $plaintext[$i + 1]
+            $eletr = $plaintext[$pos + 1]
         }
-        $ciphertext .= $eChar;
+        $ciphertext .= $eletr;
     }
     else
     {
-        my $posNeg = first_index {$_ eq $plaintext[$i - 1]} @alphabet;
+        my $posNeg = first_index {$_ eq $plaintext[$pos - 1]} @indeks;
         my $edx = 5 * (floor($idx / 5)) + $posNeg - 5 * (floor($posNeg / 5));
         if ($edx > 24)
         {
@@ -78,12 +78,12 @@ for my $i (0..$#plaintext)
         {
             $edx = $edx + 24;
         }
-        $eChar = $alphabet[$edx];
-        if ($eChar eq $plaintext[$i])
+        $eletr = $indeks[$edx];
+        if ($eletr eq $plaintext[$pos])
         {
-            $eChar = $plaintext[$i - 1]
+            $eletr = $plaintext[$pos - 1]
         }
-        $ciphertext .= $eChar;
+        $ciphertext .= $eletr;
     }
 }
 print "$ciphertext\n";
